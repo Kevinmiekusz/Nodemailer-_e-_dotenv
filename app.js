@@ -1,0 +1,30 @@
+const express = require("express");
+const app = express();
+const dotenv = require("dotenv").config()
+
+
+app.use(express.static("./app/public"));
+
+
+app.set("view engine","ejs");
+
+app.set("views","./app/views");
+
+
+
+app.use(express.json());
+
+app.use(express.urlencoded({extended:true}));
+
+
+
+const rota = require("./app/routes/router");
+
+app.use("/", rota);
+
+
+
+
+app.listen(process.env.APP_PORT, ()=>{
+    console.log(`Servidor on-line \nhttp://localhost:${process.env.APP_PORT}`)
+})
